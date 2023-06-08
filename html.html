@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calendar Website</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Mystery+Quest&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="pizza-background"></div>
+
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button id="prev-month-btn">&larr;</button>
+            <h1 id="month-year"></h1>
+            <button id="next-month-btn">&rarr;</button>
+        </div>
+        <table id="calendar">
+            <thead>
+                <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Calendar dates will be generated dynamically using JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <div id="note-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="note-modal-date"></h2>
+            <textarea id="note-modal-text" placeholder="Enter your note here..."></textarea>
+            <button id="note-modal-save">Save</button>
+        </div>
+    </div>
+
+    <div id="gif-container"></div>
+
+    <script src="script.js"></script>
+    <script>
+        var currentDate = new Date();
+        var currentYear = currentDate.getFullYear();
+        var currentMonth = currentDate.getMonth();
+
+        function initializeCalendar() {
+            generateCalendar(currentYear, currentMonth);
+        }
+
+        function previousMonth() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            generateCalendar(currentYear, currentMonth);
+        }
+
+        function nextMonth() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            generateCalendar(currentYear, currentMonth);
+        }
+
+        document.getElementById("prev-month-btn").addEventListener("click", previousMonth);
+        document.getElementById("next-month-btn").addEventListener("click", nextMonth);
+
+        initializeCalendar();
+    </script>
+</body>
+</html>
